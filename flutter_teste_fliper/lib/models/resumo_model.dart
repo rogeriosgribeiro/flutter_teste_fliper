@@ -2,38 +2,42 @@ import 'package:flutter_teste_fliper/repositories/resumo_repository.dart';
 
 class ResumoModel {
   
-  String valorInvestido;
-  String rentabilidadeMes;
-  String valorCDI;
-  String valorGanhoMes;
+  int id;
+  int valorInvestido;
+  double rentabilidadeMes;
+  double valorCDI;
+  double valorGanhoMes;
   
   ResumoModel(
-    {this.valorInvestido,
+    {this.id,
+    this.valorInvestido,
     this.rentabilidadeMes,
     this.valorCDI,
     this.valorGanhoMes});
 
   ResumoModel.fromJson(Map<String, dynamic> json) {
 
-    valorInvestido = json[""];
-    rentabilidadeMes = json[""];    
-    valorCDI = json[""];
-    valorGanhoMes = json[""];
+    id = json["id"];
+    valorInvestido = json["total"];
+    rentabilidadeMes = json["profitability"];
+    valorCDI = json["cdi"];
+    valorGanhoMes = json["gain"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     
-    data["id"] = this.valorInvestido;
-    data["username"] = this.rentabilidadeMes;
-    data["token"] = this.valorCDI;
-    data["idPlano"] = this.valorGanhoMes;
+    data["id"] = this.id;
+    data["total"] = this.valorInvestido;
+    data["profitability"] = this.rentabilidadeMes;
+    data["cdi"] = this.valorCDI;
+    data["gain"] = this.valorGanhoMes;
 
     return data;
   }
 
-  Future<ResumoModel> buscarResumo(String secret) async {
-    ResumoModel objResumoModel = await ResumoRepository().buscarResumo(secret);      
+  Future<ResumoModel> buscarResumo() async {
+    ResumoModel objResumoModel = await ResumoRepository().buscarResumo();
     return objResumoModel;
   }
 }
